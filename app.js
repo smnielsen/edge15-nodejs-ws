@@ -13,7 +13,9 @@ var compression 		= require('compression'),
 	bodyParser 			= require('body-parser'),
 	morgan 				= require('morgan');
 
+/* Routes sources */
 var routes = require('./routes/index');
+var employee = require('./routes/employee');
 
 var mongoose = require('mongoose');
 
@@ -41,6 +43,7 @@ mongoose.connect(app.get('mongodb-url'));
 /* App Routes
  ============================== */
 app.use('/', routes);
+app.use('/employee', employee);
 
 app.listen(1337, function() {
 	console.log('Unicorn running on port: 1337');
