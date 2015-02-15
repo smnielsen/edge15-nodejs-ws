@@ -15,6 +15,8 @@ var compression 		= require('compression'),
 
 var routes = require('./routes/index');
 
+var mongoose = require('mongoose');
+
 /* App Configuration
    ============================== */
 // to get app logging for development
@@ -28,6 +30,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 // compress all requests
 app.use(compression());
+
+// Set variables
+app.set('mongodb-url', 'mongodb://localhost:27017/netlight')
+
+/* Mongoose Connection
+ ============================== */
+mongoose.connect(app.get('mongodb-url'));
 
 /* App Routes
  ============================== */
