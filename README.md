@@ -18,7 +18,9 @@ $ npm install
 # Development:
 
 ```sh
-$ npm run start
+    $ npm run start
+    
+    $ npm run debug ( Make sure to install node-inspector first)
 ```
 
 # Workshop instructions:
