@@ -29,11 +29,14 @@ app.use(bodyParser.urlencoded({extended: true}));
 // compress all requests
 app.use(compression());
 
+// Set variables
+app.set('port', process.env.PORT || 1337);
+
 /* App Routes
  ============================== */
 app.use('/', routes);
 
-app.listen(1337, function() {
-	console.log('Unicorn running on port: 1337');
+app.listen(app.get('port'), function() {
+	console.log('Unicorn running on port: ' + app.get('port'));
 });
 
