@@ -2,6 +2,7 @@
 	Edge Academy 2015
 	Introduction to NodeJs and MongoDB
 	Authors: Simon Nielsen, Albin Carnstam
+
  */
 
 

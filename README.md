@@ -9,4 +9,9 @@ Workshop project for Edge Academy at Netlight 2015
 
     npm run start
 
-Keep them all up for complete live reload.
+# Official documentations:
+  - NodeJs docs: http://nodejs.org/documentation/
+    - Nodeschool: http://nodeschool.io/#workshoppers
+  - ExpressJs routing: http://expressjs.com/guide/routing.html
+  - MongoDB: http://www.mongodb.org/
+  - Mongoose: http://mongoosejs.com/docs/guide.html
