@@ -6,7 +6,7 @@ var Schema	 = mongoose.Schema;
 var employeeSchema = new Schema({
 	name	: String,
 	level	: String,
-	office	: { type: mongoose.Schema.Types.ObjectId, ref: "Office" }
+	office	: { type: Schema.Types.ObjectId, ref: "Office" }
 });
 
 

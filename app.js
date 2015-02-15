@@ -11,13 +11,13 @@ var app = express();
 
 var compression 		= require('compression'),
 	bodyParser 			= require('body-parser'),
-	morgan 				= require('morgan');
+	morgan 				= require('morgan'),
+	mongoose = require('mongoose');
 
 /* Routes sources */
 var routes = require('./routes/index');
 var employee = require('./routes/employee');
-
-var mongoose = require('mongoose');
+var office = require('./routes/office');
 
 /* App Configuration
    ============================== */
@@ -45,6 +45,13 @@ mongoose.connect(app.get('mongodb-url'));
  ============================== */
 app.use('/', routes);
 app.use('/employee', employee);
+app.use('/office', office);
+
+/* PUT IN EXAMPLE! Error Handler
+ ============================== */
+app.use(function(err, req, res, next) {
+	res.status(err.statusCode || 500).json(err);
+});
 
 app.listen(app.get('port'), function() {
 	console.log('Unicorn running on port: ' + app.get('port'));
