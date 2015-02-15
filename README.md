@@ -74,7 +74,12 @@ Use if you get stuck.
 ```
 
 ### Create a new get Express route
- - 
+
+### Create post-route with save method for Office and Employee
+
+### Create get-route with find method for Office and Employee
+
+### Create delete-route with remove method for Office and Employee
 
 # Official documentations:
   - NodeJs docs: http://nodejs.org/documentation/
