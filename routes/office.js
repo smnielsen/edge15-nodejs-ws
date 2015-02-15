@@ -69,9 +69,12 @@ router.route('/:city')
 			}
 			res.status(203).json({
 				status: 203,
-				message: 'Removed city: ' + city
+				message: 'Removed city: ',
+				office: { city: city }
 			})
 		});
 	});
+
+
 
 module.exports = router;
