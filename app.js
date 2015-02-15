@@ -13,9 +13,9 @@ var compression 		= require('compression'),
 	bodyParser 			= require('body-parser'),
 	morgan 				= require('morgan');
 
-var routes = require('./routes/index');
-
 var mongoose = require('mongoose');
+
+var routes = require('./routes/index');
 
 /* App Configuration
    ============================== */
@@ -32,7 +32,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(compression());
 
 // Set variables
-app.set('mongodb-url', 'mongodb://localhost:27017/netlight')
+app.set('port', process.env.PORT || 1337);
+app.set('mongodb-url', 'mongodb://localhost:27017/netlight');
 
 /* Mongoose Connection
  ============================== */
@@ -42,7 +43,7 @@ mongoose.connect(app.get('mongodb-url'));
  ============================== */
 app.use('/', routes);
 
-app.listen(1337, function() {
-	console.log('Unicorn running on port: 1337');
+app.listen(app.get('port'), function() {
+	console.log('Unicorn running on port: ' + app.get('port'));
 });
 
