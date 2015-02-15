@@ -39,6 +39,7 @@ app.set('mongodb-url', 'mongodb://localhost:27017/netlight');
 
 /* Mongoose Connection
  ============================== */
+mongoose.set('debug', true);
 mongoose.connect(app.get('mongodb-url'));
 
 /* App Routes
