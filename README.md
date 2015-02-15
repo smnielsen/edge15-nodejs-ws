@@ -35,12 +35,12 @@ In this example Workshop we'll create a database with the following data-tree.
 
 - Netlight (database)
  - Office
-   - city: String
-   - country: String
+  - city: String
+  - country: String
  - Employee
-   - name: String
-   - level: String
-   - office: ObjectId
+  - name: String
+  - level: String
+  - office: ObjectId
 
 
 ## Development steps
