@@ -34,13 +34,13 @@ $ npm install
 In this example Workshop we'll create a database with the following data-tree.
 
 - Netlight (database)
- - Office
-  - city: String
-  - country: String
- - Employee
-  - name: String
-  - level: String
-  - office: ObjectId
+  - Office
+    - city: String
+    - country: String
+  - Employee
+    - name: String
+    - level: String
+    - office: { type: Schema.Types.ObjectId, ref: 'Office' }
 
 
 ## Development steps
