@@ -55,6 +55,16 @@ router.post('/', function(req, res, next) {
 	});
 });
 
+var updateEmployee = function(username, data) {
+	Employee.update(
+		{ username: username },
+		{ $set: data}).exec(function(err, employee) {
+			if (err) return next(err);
+
+			res.json(employee);
+		});
+};
+
 router.route('/:username')
 	.get(function(req, res, next) {
 		Employee.findOne({ username: req.params.username }).populate('office').exec(function(err, employee) {
@@ -65,7 +75,7 @@ router.route('/:username')
 	})
 	.put(function(req, res, next) {
 		var data = req.body;
-		
+
 		if(!data || !data.name || !data.level) {
 			console.log('Missing required fields: ', data);
 			var err = new Error(500);
@@ -73,27 +83,18 @@ router.route('/:username')
 			err.data = data;
 			return next(err);
 		}
-		
+
+		var setters = { name: data.name, level: data.level };
 		if (data.office) {
 			Office.findOne({city: data.office}).exec(function(err, office){
 				if (err) return next(err);
-	
-				Employee.update(
-					{ username: req.params.username },
-					{ $set: { office: office._id, name: data.name, level: data.level }}).exec(function(err, employee) {
-						
-					if (err) return next(err);
-			
-					res.json(employee);
-				});
+
+				setters['office'] =  office._id;
+				updateEmployee(req.params.username, setters);
 			});
 		} 
-		else {	
-			Employee.update({ username: req.params.username }, { $set: {name: data.name, level: data.level }}).exec(function(err, employee) {
-				if (err) return next(err);
-			
-				res.json(employee);
-			});
+		else {
+			updateEmployee(req.params.username, setters);
 		}
 	})
 	.delete(function(req, res, next) {
