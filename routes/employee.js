@@ -12,6 +12,20 @@ router.get('/', function(req, res, next) {
 	})
 });
 
+router.delete('/', function(req, res, next) {
+	//Clear out old data
+	Employee.remove({}, function(err) {
+		if (err) {
+			console.error('LikeModel: error deleting old data.');
+		} else {
+			console.info('LikeModel: success deleting old data');
+		}
+		Employee.find({}, function(err, result) {
+			res.json(result);
+		});
+	});
+});
+
 router.post('/', function(req, res, next) {
 	var data = req.body;
 	
@@ -25,8 +39,14 @@ router.post('/', function(req, res, next) {
 
 	Office.findOne({city: data.office}).exec(function(err, office){
 		if (err) return next(err);
-	
-		var employee = new Employee({ name: data.name, level: data.level, office: office, username: data.username });
+		
+		var username =  data.name.split(' ')[0][0] +
+						data.name.split(' ')[0][1] +
+						data.name.split(' ')[1][0] +
+						data.name.split(' ')[1][1];
+
+		var employee = new Employee({ username: username.toLowerCase(), name: data.name, level: data.level, office: office});
+
 		employee.save(function (err, data) {
 			if (err) return next(err);
 
@@ -58,7 +78,10 @@ router.route('/:username')
 			Office.findOne({city: data.office}).exec(function(err, office){
 				if (err) return next(err);
 	
-				Employee.update({ username: req.params.username }, { $set: { office: office._id, name: data.name, level: data.level }}).exec(function(err, employee) {
+				Employee.update(
+					{ username: req.params.username },
+					{ $set: { office: office._id, name: data.name, level: data.level }}).exec(function(err, employee) {
+						
 					if (err) return next(err);
 			
 					res.json(employee);
