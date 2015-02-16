@@ -28,18 +28,35 @@ router.post('/', function(req, res, next) {
 	});
 });
 
-router.route('/:id')
+router.route('/:username')
 	.get(function(req, res, next) {
-		var err = new Error();
-		err.statusCode = 404;
-		err.message = "No get defined yet!";
-		next(err);
+		Employee.findOne({ username: req.params.username }).populate('office').exec(function(err, employee) {
+			if (err) return next(err);
+			
+			res.json(employee);
+		});
 	})
 	.put(function(req, res, next) {
-		var err = new Error();
-		err.statusCode = 404;
-		err.message = "No put defined yet!";
-		next(err);
+		var data = req.body;
+		
+		if (data.office) {
+			Office.findOne({city: data.office}).exec(function(err, office){
+				if (err) return next(err);
+	
+				Employee.update({ username: req.params.username }, { $set: { office: office.__id, name: data.name, level: data.level }}).exec(function(err, employee) {
+					if (err) return next(err);
+			
+					res.json(employee);
+				});
+			});
+		} 
+		else {	
+			Employee.update({ username: req.params.username }, { $set: {name: data.name, level: data.level }}).exec(function(err, employee) {
+				if (err) return next(err);
+			
+				res.json(employee);
+			});
+		}
 	})
 	.delete(function(req, res, next) {
 		var err = new Error();
