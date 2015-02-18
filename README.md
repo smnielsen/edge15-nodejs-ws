@@ -25,25 +25,25 @@ $ npm install
 
 # Workshop instructions:
 
-## Prerequisites
+### Prerequisites
 * [Git](http://git-scm.com/downloads) - Required for cloning the startup project
 * [NodeJs](http://nodejs.org/) - Will install Node and NPM (or use [NVM](https://github.com/creationix/nvm))
 * [MongoDB](http://docs.mongodb.org/manual/installation/) - Install MongoDB engine by following the online instructions
 
-# "End result"
+### "End result"
 In this example Workshop we'll create a database with the following data-tree.
 
 - Netlight (database)
- - Office
-   - city: String
-   - country: String
- - Employee
-   - name: String
-   - level: String
-   - office: ObjectId
+  - Office
+    - city: String
+    - country: String
+  - Employee
+    - name: String
+    - level: String
+    - office: { type: Schema.Types.ObjectId, ref: 'Office' }
 
 
-## Development steps
+# Workshop
 These steps are here to help you get started with the workshop.
 Use if you get stuck.
 
